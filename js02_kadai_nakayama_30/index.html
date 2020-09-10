@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>myMemoPad</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/sample.css">
+
+</head>
+<body>
+<header>
+<h1>MemoPad</h1>
+</header>
+<main style="display: none;">
+    <div id="wrapper">
+    <p>メモ</p><textarea id="text_area"></textarea>
+    <p>日付</p><input type=date id="date"></input>
+    <ul>
+        <li id="save">保存</li>
+        <li id="clear">全て削除</li>
+    </ul>
+    
+<table id="list">
+<!-- ここに追加データが挿入される -->
+</table>
+
+</div>
+</main>
+<script>
+
+$("main").fadeIn(1000);
+
+
+
+$("#save").on("click", function(){
+    const key = $("#date").val();
+    const value = $("#text_area").val();
+    localStorage.setItem(key, value);
+    alert("保存します");
+    const html = '<tr><td>'
+        +key+
+        '</td><td>'
+        +value+
+        '</td><td><button id="delite">削除</button></td></tr>'
+    $("#list").append(html);
+    $("#text_area").val("");
+});
+
+
+$("#clear").on("click",function(){
+    alert("全て削除します");
+    localStorage.clear();
+    $("#list").empty();
+    // localStorage.removeItem(key);
+    // $("#text_area").val("");
+    // $("#list").empty();
+});
+
+// if(localStorage.getItem(key)){
+//     // const key = $("#date").val();
+//     // const value = $("#text_area").val();
+//     const value = localStorage.getItem(key);
+//     const html = '<tr><td>'
+//         +key+
+//         '</td><td>'
+//         +value+
+//         '</td><td><button id="delite">削除</button></td></tr>'
+//     $("#list").append(html);
+
+// }
+
+for(let i=0; i<localStorage.length; i++){
+    const key   = localStorage.key(i);
+    const value = localStorage.getItem(key);
+    const html = '<tr><td>'
+        +key+
+        '</td><td>'
+        +value+
+        '</td><td><button id="delite">削除</button></td></tr>'
+    $("#list").append(html);
+
+}
+
+$("#delite").on("click", function(){
+    localStorage.removeItem("memo");
+    alert("一行削除したいのさ");
+});
+
+
+
+</script>
+
+</body>
+</html>
