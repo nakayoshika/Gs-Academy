@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Chatアプリ</title>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/sample.css">
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+
+<h1>CHAT TOOL</h1>
+<div id="wrapper">
+
+  <div id="output"></div>
+
+    <form accept="" method="POST">
+      <div class="text-area">
+          <ul id="chat-icon">
+            <li class="imgs" data-img="0"><img src="imgs/buke.png" width="40"></li>
+            <li class="imgs" data-img="1"><img src="imgs/caram.png" width="40"></li>
+            <li class="imgs" data-img="2"><img src="imgs/tuku.jpg" width="40"></li>
+          </ul>
+          <div>
+            <input type="text" id="uname" placeholder="名前を入力">
+        </div>
+        <div>
+           <textarea name="text" id="text" cols="30" rows="10" placeholder="メッセージを入力"></textarea>
+           <button id="send">送信</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+<!--/ コンテンツ表示画面 -->
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+
+
+<!--** 以下Firebase **-->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+ 
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const ref = firebase.database().ref();  //.ref()=ユニークキーを自動でふってください
+
+
+  //アイコン処理
+  let icon = 0;
+  const img =["buke.png","caram.png","tuku.jpg"];
+  $(".imgs").on("click",function(){
+  icon = $(this).attr("data-img");
+  });
+
+    //関数
+    function  send(){
+    let now = new Date();
+    let month = now.getMonth() + 1;
+    let d = now.getDate();
+    let h = now.getHours();
+    let m = now.getMinutes();
+    let time = month+"月"+d+"日"+h+":"+m;
+
+    const uname = $("#uname").val();
+    const text = $("#text").val();
+
+    const msg = {
+        uname:uname,
+        text:text,
+        time:time,
+        icon:icon,
+    }
+    ref.push(msg); //set 決まった名前, push=ユニーカー
+  };
+
+
+  //送信
+  $("#send").on("click" , function(){
+    send();  //ここは関数がはいる
+  });
+
+  //受信処理
+  ref.on("child_added" , function(data){
+    const v = data.val(); //送信されたオブジェクトを取得
+    const k = data.key; //ユニークキーを取得
+    const h ='<div class="chat-box"><div class="chat-face"><div><img src="imgs/'+img[v.icon]+'" width="50" height="50"></div><div class="chat-name">'+v.uname+'</div></div><div class="chat-area"><div class="chat-hukidashi">'+v.text+'</div><p class="chat-date">'+v.time+'</p></div></div>';
+
+    $("#output").append( h );
+    $('#output').scrollTop($('#output')[0].scrollHeight);
+  });
+
+  //イベント情報取得
+  $("#text").on("keydown" , function(e){
+    //console.log(e);
+    if(e.keyCode == 13){
+      send();  //ここは関数がはいる
+    }
+  });
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

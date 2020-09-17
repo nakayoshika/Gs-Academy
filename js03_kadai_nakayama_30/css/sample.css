@@ -1,0 +1,147 @@
+body {
+    background-color: #5acec6;
+}
+
+
+#wrapper {
+	width: 600px;
+    margin: 0 auto;
+    padding: 20px 0 0 0;
+	background: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    padding: 30px;
+    background-color:#5acec6;
+    color: #FFF;
+    font-size: 40px;
+    font-family: 'Arial', sans-serif;
+}
+#output {
+    height: 450px;
+    overflow: auto;
+}
+
+/* チャットレイアウト */
+.chat-box {
+    width: 100%;
+    height: auto;
+    overflow: hidden; /*floatの解除*/
+    margin-bottom: 20px;
+}
+.chat-face {
+    float: left;
+    margin: 20px -120px 0 20px ;
+}
+.chat-face img{
+    border-radius: 30px;
+    /* border: 1px solid #ccc; */
+    box-shadow: 0 0 4px #ddd;
+}
+.chat-area {
+    width: 100%;
+    float: right;
+}
+.chat-hukidashi {
+    display: inline-block; 
+    padding: 15px 20px;
+    margin-left: 140px;
+    margin-top: 20px;
+    border-radius: 10px;
+    position: relative; 
+    background-color: #c1e9e3; 
+}
+
+.chat-hukidashi:after {
+    content: "";
+    position: absolute;
+    top: 50%; left: -10px;
+    margin-top: -10px;
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #c1e9e3 transparent transparent;
+}
+
+.chat-name {
+    font-size: 14px;
+    color: #9a9a9a;
+    margin: 5px 0 0 0;
+    font-weight: bold;
+}
+.chat-date {
+    font-size: 12px;
+    color: #9a9a9a;
+    margin-left: 140px;
+    margin-top: 10px;
+}
+
+.text-area {
+    margin: 40px 0 0 0;
+    background-color: #d8d8d8;
+}
+
+#uname {
+    width: 200px;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    margin: 20px 0 10px 30px ;
+}
+
+textarea {
+    width: 500px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    margin: 10px 0 10px 30px ;
+
+}
+
+div button {
+    padding: 5px;
+    width: 100px;
+    font-size: 14px;
+    margin: 10px 0 20px 30px ;
+    background-color: #22aba2;
+    color: #FFF;
+    border: none;
+    outline: none;
+
+}
+
+::placeholder{
+    color:rgb(179, 179, 179)
+  }
+
+#chat-icon {
+    display: flex;
+    margin: 20px 0 0 20px;
+    padding: 20px 0 0 0;
+}
+
+#chat-icon li {
+    padding: 0 10px;
+
+}
+
+#chat-icon li img{
+    border-radius: 30px;
+    /* border: 1px solid #ccc; */
+    box-shadow: 0 0 4px #ddd;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+#chat-icon li img:hover{
+    opacity: 0.6;
+    transition-duration: 0.3s;
+  }
